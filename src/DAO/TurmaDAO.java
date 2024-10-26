@@ -15,8 +15,19 @@ public class TurmaDAO {
     public Turma createTurma(Turma turma){
 
         try {
-
             Connection coon = ConnectionMysql.openConnection();
+
+            String buscaProfessor = "SELECT * FROM professor WHERE idProfessor = ?";
+            PreparedStatement statementBusca = coon.prepareStatement(buscaProfessor);
+            statementBusca.setInt(1, turma.getIdProfessor());
+
+            ResultSet resultado = statementBusca.executeQuery();
+
+            if(!resultado.next()) {
+                System.out.println("Professor não existe");
+                return null;
+            }
+
 
             String sqlTurma = "INSERT INTO turma (Nome, Professor_idProfessor) " +
                     "VALUES (?,?)";
@@ -112,7 +123,6 @@ public class TurmaDAO {
         }catch (SQLException e){
             System.out.println("Erro ao excluir Cliente: "+e.getMessage());
         }
-
     }
 }
 

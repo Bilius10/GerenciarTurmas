@@ -20,8 +20,9 @@ public class Main {
         int opcao = 0;
         while (opcao != 11) {
             System.out.println("\n 1-Criar Professor \n 2-Criar ALuno \n 3-Criar Sala" +
-                    "\n 4-Mostrar Professores \n 5-Mostrar Alunos \n 6-Mostrar Sala" +
-                    "\n 7-Excluir Professor \n 8-Excluir Aluno \n 9-Nota aluno \n 10-Mostrar Salas \n 11-Sair");
+                    "\n 4-Mostrar Professores \n 5-Mostrar Alunos \n 6-Procurar Sala por id" +
+                    "\n 7-Excluir Professor \n 8-Excluir Aluno \n 9-Atribuir nota a aluno \n 10-Mostrar Salas " +
+                    "\n 11-Sair");
 
             opcao = teclado.nextInt();
 

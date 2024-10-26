@@ -123,6 +123,8 @@ public class ProfessorDAO {
             int rowsAffected = statementDelete.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Professor excluido");
+            }else{
+                System.out.println("Professor não encontrado");
             }
 
         }catch (SQLException e){

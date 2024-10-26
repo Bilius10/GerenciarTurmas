@@ -17,6 +17,17 @@ public class AlunoDAO {
 
             Connection coon = ConnectionMysql.openConnection();
 
+            String buscaTurma = "SELECT * FROM turma WHERE idturma = ?";
+            PreparedStatement statementBusca = coon.prepareStatement(buscaTurma);
+            statementBusca.setInt(1, aluno.getTurma_idturma());
+
+            ResultSet resultado = statementBusca.executeQuery();
+
+            if(!resultado.next()) {
+                System.out.println("Turma não existe");
+                return null;
+            }
+
             // Inserindo pessoa
             String sqlPessoa = "INSERT INTO pessoa (nome, idade) " +
                     "VALUES (?,?)";
@@ -128,6 +139,8 @@ public class AlunoDAO {
             int rowsAffected = statementDelete.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Aluno excluido");
+            }else{
+                System.out.println("Aluno não encontrado");
             }
 
             ConnectionMysql.closeConnection();
@@ -151,6 +164,33 @@ public class AlunoDAO {
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Aluno atualizado");
+            }else{
+                System.out.println("Aluno não encontrado");
+            }
+            ConnectionMysql.closeConnection();
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar aluno: " + e.getMessage());
+        }
+    }
+
+    public void trocarTurma(int idSala, int idAluno) {
+
+        try {
+
+            Connection conn = ConnectionMysql.openConnection();
+
+            String mudarSala = "UPDATE aluno SET Turma_idturma = ? WHERE idAluno = ?";
+
+            PreparedStatement statement = conn.prepareStatement(mudarSala);
+            statement.setDouble(1, idSala);
+            statement.setInt(2, idAluno);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Aluno atualizado");
+            }else{
+                System.out.println("Aluno não encontrado");
             }
             ConnectionMysql.closeConnection();
 

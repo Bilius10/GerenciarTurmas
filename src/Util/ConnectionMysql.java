@@ -13,6 +13,7 @@ public class ConnectionMysql {
     public static Connection connection = null;
 
 
+
     public static Connection openConnection(){
         try{
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
